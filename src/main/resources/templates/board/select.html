@@ -18,7 +18,7 @@
        
     </div>
     <div class="col-auto">
-    <a href="#" type="button" class="btn btn-primary" >글쓰기</a>
+        <a class="btn btn-outline-primary" th:href="@{/board/insert.do}">게시글 작성</a>
 </div>
     <div>
         <table class="table table-hover table-striped text-center" style="border: 1px solid;">
@@ -27,40 +27,20 @@
                     <th>게시글번호</th>
                     <th>제목</th>
                     <th>작성자</th>
+                    <th>작성일</th>
                     <th>조회수</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>4</td>
-                    <td><a href="" style="color: black; text-decoration: none;">제가 네번째네요</a></td>
-                    <td>부릉부릉</td>
-                    <td>113</td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td><a href="" style="color: black; text-decoration: none;">오늘 프로젝트 끝난사람 참고</a></td>
-                    <td>콩쥐POTG</td>
-                    <td>41242</td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td><a href="" style="color: black; text-decoration: none;">나이스 첫글</a></td>
-                    <td>안봐도비디오</td>
-                    <td>514</td>
-                </tr>
-
-                <tr>
-                    <td>1</td>
-                    <td><strong style="color: blue;"><a href="" style="color: blue; text-decoration: none;">관리자
-                                공지입니다.(필독)</a></strong></td>
-                    <td><strong style="color: blue;"> 관리자</strong></td>
-                    <td>51552</td>
-                </tr>
-
-
+                    <tr th:each="one : ${list}">
+                        <td th:text="${one.no}"></td>
+                        <td>
+                            <a th:href="@{/board/selectone.do(no=${one.no})}" th:text="${one.title}"></a>
+                        </td>
+                        <td th:text="${one.writer}"></td>
+                        <td th:text="${one.regdate}"></td>
+                        <td th:text="${one.hit}"></td>
+                    </tr>
             </tbody>
         </table>
     </div>
