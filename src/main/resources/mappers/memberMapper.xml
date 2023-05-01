@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 기존의 interface ItemMapper명과 일치해야 함-->
+<mapper namespace="com.example.mapper.MemberMapper"> 
+
+    <!-- Join -->
+    <insert id="insertMemberOne" parameterType="com.example.dto.Member">
+        INSERT INTO memtb(id, password, name, age, role)
+        VALUES(#{id}, #{password}, #{name}, #{age}, #{role})
+    </insert>
+
+    <!-- Login -->
+    <select id="selectMemberOne" parameterType="com.example.dto.Member" resultType="com.example.dto.Member">
+        SELECT m.id, m.name, m.age FROM memtb m WHERE m.id=#{id} AND m.password=#{password}
+    </select>
+
+    <!-- update Info -->
+    <update id="updateMemberOne" parameterType="com.example.dto.Member" resultType="com.example.dto.Member">
+        <script>
+       UPDATE memtb SET name =#{name} 
+       <if test ='age != null'> 
+       ,age = #{obj.age}
+       </if>
+       WHERE id =#{id};
+       </script>
+    </update>
+
+
+    <!-- delete Member -->
+    <update id="deleteMemberInfo" parameterType="com.example.dto.member">
+        UPDATE memtb SET password = null, name = null , age = null, regdate = null
+        WHERE id = #{id} AND password =	#{password}
+    </update>
+</mapper>

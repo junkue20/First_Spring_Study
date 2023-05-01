@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 기존의 interface ItemMapper명과 일치해야 함-->
+<mapper namespace="com.example.mapper.ItemMapper"> 
+    
+    <!-- 물품 전체조회 -->
+    <select id="selectItemList" resultType="com.example.dto.Item">
+    <!-- resultType에는 반환하고자 하는 형태가 들어가야 함. -->
+        SELECT * FROM item ORDER BY no DESC
+    </select>
+
+    <!-- 물품이미지 등록 (1장) -->
+    <insert id="insertItemImage" parameterType="com.example.dto.ItemImage">
+        INSERT INTO itemimage(filename, filesize, filedata, filetype, itemno)
+        VALUES(#{filename}, #{filesize}, #{filedata}, #{filetype},#{itemno})
+    </insert>
+    
+    <!-- 이미지 한개의 주소 설정 -->
+    <select id="selectItemImageOne" parameterType="long" resultType="com.example.dto.ItemImage">
+        SELECT * FROM itemimage WHERE no = #{no}
+    </select>
+
+    <!-- 물품당 이미지no 조회 -->
+    <select id="selectItemImageNo" parameterType="long" resultType="long">
+        SELECT i.no FROM itemimage i WHERE itemno = #{itemno}
+    </select>
+</mapper>

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import com.example.dto.Board;
 
@@ -23,7 +22,7 @@ public interface BoardMapper {
 
     // 전체목록 조회
     @Select(value = {
-            "	SELECT * FROM board	ORDER BY no DESC	"
+            "	SELECT * FROM board ORDER BY no DESC	"
     })
     public List<Board> selectBoard();
 
@@ -31,8 +30,8 @@ public interface BoardMapper {
 
     // 한개조회
     @Select(value = {
-            "	SELECT * FROM board		",
-            "	WHERE no = #{no}	"
+            "	SELECT * FROM board	",
+            "	WHERE no = #{no}        "
     })
     public Board selectBoardOne(@Param("no") long no);
 

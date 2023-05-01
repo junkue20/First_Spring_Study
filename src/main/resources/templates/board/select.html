@@ -10,16 +10,16 @@
 </head>
 
 <body>
-    
-        <header>
-            <br>
-            <h1 class="text-center">Jungyu's Spring note</h1>
-        </header>
-       
+    <header>
+        <br>
+        <h1 class="text-center">Jungyu's Spring note</h1>
+    </header>
+
     </div>
     <div class="col-auto">
         <a class="btn btn-outline-primary" th:href="@{/board/insert.do}">게시글 작성</a>
-</div>
+        <a class="btn btn-outline-primary" th:href="@{/home.do}">홈 이동</a>
+    </div>
     <div>
         <table class="table table-hover table-striped text-center" style="border: 1px solid;">
             <thead>
@@ -32,15 +32,15 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr th:each="one : ${list}">
-                        <td th:text="${one.no}"></td>
-                        <td>
-                            <a th:href="@{/board/selectone.do(no=${one.no})}" th:text="${one.title}"></a>
-                        </td>
-                        <td th:text="${one.writer}"></td>
-                        <td th:text="${one.regdate}"></td>
-                        <td th:text="${one.hit}"></td>
-                    </tr>
+                <tr th:each="one : ${list}">
+                    <td th:text="${one.no}"></td>
+                    <td>
+                        <a th:href="@{/board/selectone.do(no=${one.no})}" th:text="${one.title}"></a>
+                    </td>
+                    <td th:text="${one.writer}"></td>
+                    <td th:text="${one.regdate}"></td>
+                    <td th:text="${one.hit}"></td>
+                </tr>
             </tbody>
         </table>
     </div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>물품 전체조회</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <header>
+        <br>
+        <h1 class="text-center">Jungyu's ItemSelecter</h1>
+    </header>
+    <table class="table table-hover table-striped text-center" style="border: 1px solid;">
+        <thead>
+            <tr style="background-color: rgb(255, 237, 237);">
+                <th>물품번호</th>
+                <th>물품명</th>
+                <th>물품내용</th>
+                <th>물품가격</th>
+                <th>물품수량</th>
+                <th>등록일</th>
+                <th>이미지 등록하기</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 'ItemController'로부터 전달받은 "list" -->
+            <tr th:each="obj : ${list}">
+                <td th:text="${obj.no}"></td>
+                <td th:text="${obj.name}"></td>
+                <td th:text="${obj.content}"></td>
+                <td th:text="${obj.price}"></td>
+                <td th:text="${obj.quantity}"></td>
+                <td th:text="${obj.regdate}"></td>
+                <!-- 물품 번호를 받아와서 이미지를 등록하는 방식. -->
+                <td><a th:href="@{/item/insertimage.do(no=${obj.no})}" class="btn btn-outline-danger">이미지 등록</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
