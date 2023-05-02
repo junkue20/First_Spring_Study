@@ -4,6 +4,7 @@
 <!-- 기존의 interface ItemMapper명과 일치해야 함-->
 <mapper namespace="com.example.mapper.ItemMapper">
 
+    <!-- 물품 일괄수정 -->
     <update id="updateItemBatch" parameterType="arraylist">
     UPDATE item SET
         name = (CASE 
