@@ -20,6 +20,7 @@ public class Item {
 	private long quantity;
 	private long price;
 	private Date regdate;
+	private String seller; // 판매자 아이디
 	
 	private long imageNo; // 대표 이미지번호를 저장할 임시변수
 

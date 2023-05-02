@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>일괄수정</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+    <h3>일괄수정</h3>
+
+    <form th:action="@{/seller/updatebatch.do}" method="post">
+        <table>
+            <tr th:each="obj : ${list}">
+                <td><input name="no[]" type="text" th:value="${obj.no}" readonly/></td>
+                <td><input name="name[]" type="text" th:value="${obj.name}" placeholder="물품명" /></td>
+                <td><input name="content[]" type="text" th:value="${obj.content}" placeholder="물품내용" /></td>
+                <td><input name="price[]" type="number" th:value="${obj.price}" placeholder="물품가격" /></td>
+                <td><input name="quantity[]" type="number" th:value="${obj.quantity}" placeholder="물품수량" /></td>
+            </tr>
+        </table>
+        <a th:href="@{/seller/home.do(menu=2)}">물품관리</a>
+        <input type="submit" value="일괄수정">
+    </form>
+</body>
+
+</html>

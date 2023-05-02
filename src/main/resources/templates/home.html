@@ -24,8 +24,8 @@
 
         <a th:href="@{/member/update.do}">정보수정</a>
         <a th:href="@{/member/delete.do}">회원탈퇴</a>
-        <div th:if="${#strings.equals(session.ROLE, 'SELLER')}">
-            <a th:href="@{/seller/home.do}">판매자 홈</a>
+        <div th:if="${#strings.equals(session.ROLE,'SELLER')}">
+            <a th:href="@{/seller/home.do}">판매자홈</a>
         </div>
     </div>
 </body>

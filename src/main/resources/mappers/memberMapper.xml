@@ -7,29 +7,23 @@
     <!-- Join -->
     <insert id="insertMemberOne" parameterType="com.example.dto.Member">
         INSERT INTO memtb(id, password, name, age, role)
-        VALUES(#{id}, #{password}, #{name}, #{age}, #{role})
+        VALUES( #{id}, #{password}, #{name}, #{age}, #{role} )
     </insert>
 
     <!-- Login -->
     <select id="selectMemberOne" parameterType="com.example.dto.Member" resultType="com.example.dto.Member">
-        SELECT m.id, m.name, m.age FROM memtb m WHERE m.id=#{id} AND m.password=#{password}
+        SELECT m.id, m.name, m.age, m.role FROM memtb m WHERE m.id = #{id} AND m.password = #{password}
     </select>
 
-    <!-- update Info -->
+    <!-- update Info
     <update id="updateMemberOne" parameterType="com.example.dto.Member" resultType="com.example.dto.Member">
-        <script>
-       UPDATE memtb SET name =#{name} 
-       <if test ='age != null'> 
-       ,age = #{obj.age}
-       </if>
-       WHERE id =#{id};
-       </script>
+       UPDATE memtb SET name = #{name},age = #{obj.age}
+       WHERE id = #{id};
     </update>
 
-
-    <!-- delete Member -->
+    delete Member 
     <update id="deleteMemberInfo" parameterType="com.example.dto.member">
         UPDATE memtb SET password = null, name = null , age = null, regdate = null
         WHERE id = #{id} AND password =	#{password}
-    </update>
+    </update> -->
 </mapper>

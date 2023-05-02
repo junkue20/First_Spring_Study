@@ -2,8 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 기존의 interface ItemMapper명과 일치해야 함-->
-<mapper namespace="com.example.mapper.ItemMapper"> 
-    
+<mapper namespace="com.example.mapper.ItemMapper">
+
+    <update id="updateItemBatch" parameterType="arraylist">
+    UPDATE item SET
+        name = (CASE 
+            <foreach collection="list" item="tmp" separator=" ">
+                WHEN NO=#{tmp.no} THEN #{tmp.name}
+            </foreach>
+        END),
+        content = (CASE 
+            <foreach collection="list" item="tmp" separator=" ">
+                WHEN NO=#{tmp.no} THEN #{tmp.content}
+            </foreach>
+        END),
+        price = (CASE 
+            <foreach collection="list" item="tmp" separator=" ">
+                WHEN NO=#{tmp.no} THEN #{tmp.price}
+            </foreach>
+        END),
+        quantity = (CASE 
+            <foreach collection="list" item="tmp" separator=" ">
+                WHEN NO=#{tmp.no} THEN #{tmp.quantity}
+            </foreach>
+        END)
+    WHERE no IN ( 
+        <foreach collection="list" item="tmp" separator=" , ">
+            #{tmp.no}
+        </foreach>
+    )
+    </update>
+
+    <!-- 물품번호에 해당하는 항목 반환 -->
+    <select id="selectItemNoList" parameterType="arraylist" resultType="com.example.dto.Item">
+            <foreach collection="array" item="tmp" separator=" , " open=" SELECT * FROM item WHERE no IN ( "  close=" )">
+                #{tmp}
+            </foreach>
+    </select>
+
+    <!-- 물품 일괄삭제 -->
+    <delete id="deleteItemBatch" parameterType="arraylist">
+        DELETE FROM item WHERE no IN (
+           <foreach collection="array" item="tmp" separator=" , ">
+                #{tmp}
+           </foreach>
+        )
+    </delete>
+
+    <!-- 판매자 ID별 해당물품 조회 -->
+    <select id="selectItemSellerList" parameterType="string" resultType="com.example.dto.Item">
+        SELECT * FROM item WHERE SELLER=#{seller} ORDER BY no DESC
+    </select>
+
+    <!-- 물품 일괄등록 -->
+    <insert id="insertItemBatch" parameterType="list">
+        INSERT INTO item(no, name, content, price, quantity, seller)
+        SELECT SEQ_ITEM_NO.NEXTVAL, T1.* FROM(
+            <foreach item="obj" collection="list" separator="UNION ALL">
+                SELECT '${obj.name}' NAME, '${obj.content}' CONTENT, ${obj.price} PRICE, 
+                ${obj.quantity} QUANTITY, '${obj.seller}' SELLER FROM DUAL
+            </foreach>
+        ) T1
+    </insert>
+
     <!-- 물품 전체조회 -->
     <select id="selectItemList" resultType="com.example.dto.Item">
     <!-- resultType에는 반환하고자 하는 형태가 들어가야 함. -->

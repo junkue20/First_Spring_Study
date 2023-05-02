@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>판매자 홈화면</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+    <a class="btn btn-outline-primary" th:href="@{/home.do}">홈으로</a>
+    <a class="btn btn-outline-primary" th:href="@{/seller/home.do(menu=1)}">물품일괄추가</a>
+    <a class="btn btn-outline-primary" th:href="@{/seller/home.do(menu=2)}">물품관리(일괄수정, 일괄삭제)</a>
+    <a class="btn btn-outline-primary" th:href="@{/seller/home.do(menu=3)}">주문관리</a>
+    <hr />
+    <div th:if="${#strings.equals(param.menu, '1')}">
+        <h3>물품일괄추가</h3>
+        <form th:action="@{/seller/home.do?menu=1}" method="post">
+            <th:block th:each="num: ${#numbers.sequence(1,4)}">
+                <input type="text" name="name[]" th:value="|물품명${num}|" placeholder="물품명" />
+                <input type="text" name="content[]" value="b" placeholder="물품내용" />
+                <input type="text" name="price[]" th:value="${1000+num}" placeholder="물품가격" />
+                <input type="text" name="quantity[]" value="100" placeholder="물품수량" />
+                <br />
+            </th:block>
+            <input type="submit" value="일괄추가" />
+        </form>
+    </div>
+    <div th:if="${#strings.equals(param.menu, '2')}">
+        <h3>물품관리</h3>
+        <form th:action="@{/seller/home.do?menu=2}" method="post" id="form2">
+            <table class="table table-hover table-striped text-center" style="border: 1px solid;">
+                <thead>
+                    <tr style="background-color: rgb(255, 237, 237);">
+                        <th></th>
+                        <th>물품번호</th>
+                        <th>물품명</th>
+                        <th>물품내용</th>
+                        <th>물품가격(원)</th>
+                        <th>물품수량(개)</th>
+                        <th>등록일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 'ItemController'로부터 전달받은 "list" -->
+                    <tr th:each="obj : ${list}">
+                        <td><input type="checkbox" name="chk[]" th:value="${obj.no}" /></td> <!--번호를 명시해주어야 체크시 구별가능.-->
+                        <td th:text="${obj.no}"></td>
+                        <td th:text="${obj.name}"></td>
+                        <td th:text="${obj.content}"></td>
+                        <td th:text="${obj.price}+원"></td>
+                        <td th:text="${obj.quantity}"></td>
+                        <td th:text="${obj.regdate}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="hidden" name="btn" id="btn" />
+            <input type="submit" class="btn btn-outline-secondary" value="일괄수정" onclick="updateItemAction()" />
+            <input type="submit" class="btn btn-outline-danger" value="일괄삭제" onclick="deleteItemAction()" />
+        </form>
+    </div>
+
+    <div th:if="${#strings.equals(param.menu, '3')}">
+        <h3>주문관리</h3>
+        
+    </div>
+
+
+    <script>
+        const btn    = document.getElementById('btn');
+        const form2  = document.getElementById('form2');
+
+        function deleteItemAction() {
+            if( confirm('삭제할까요?') ) {
+                btn.value='일괄삭제';
+                form2.submit();
+            }
+        }
+
+        function updateItemAction() {
+                btn.value='일괄수정';
+                form2.submit();
+        }
+    </script>
+</body>
+
+</html>

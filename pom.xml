@@ -19,6 +19,11 @@
 	<dependencies>
 		<!-- 추가하는 모든 dependency는 이쪽으로 추가 -->
 
+		<!-- 접근권한 -->
+		<dependency>
+         	<groupId>org.springframework.boot</groupId>
+         	<artifactId>spring-boot-starter-security</artifactId>
+      	</dependency>
 
 		
 		<!-- DB로 세션관리 -->

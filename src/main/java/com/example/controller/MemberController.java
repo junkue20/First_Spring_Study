@@ -14,7 +14,6 @@ import com.example.mapper.MemberMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -68,6 +67,7 @@ public class MemberController {
             // 다른페이지에서 세션의 아이디가 존재하는지 확인후 로그인 여부 판단
             httpSession.setAttribute("USERID", ret.getId());
             httpSession.setAttribute("USERNAME", ret.getName());
+            httpSession.setAttribute("USERAGE", ret.getAge());
             httpSession.setAttribute("ROLE", ret.getRole());
             return "redirect:/home.do";    // 로그인 성공 시
         }
@@ -86,16 +86,23 @@ public class MemberController {
                                                 // Info Update //
     @PostMapping(value="/update.do")
     public String updateMemberOne(@ModelAttribute Member member) {
-        log.info("login.do => {}", member.toString());
+        log.info("update.do => {}", member.toString());
         int ret = mMapper.updateMemberOne(member);
         if(ret == 1) {
-            
-        return "redirect:/home.do";
+        return "redirect:/home.do"; // 성공시
     }
-    return "";
+    return ""; // 실패시
     }
      /* ------------------------------------------------------------------------------------------------- */
                                                 // Delete Member //
     @PostMapping(value="path")
-    public String deleteMemberInfo();
+    public String deleteMemberInfo(@ModelAttribute Member member){
+        log.info("delete.do => {}", member.toString() );
+        int ret = mMapper.deleteMemberInfo(member);
+        if(ret == 1) {
+            return "redirect:/home.do"; // 탈퇴 성공시 메인페이지로
+            // 추가로 세션 비우는 코드
+        }
+        return "redirect:delete.do"; // 
+    };
 }
