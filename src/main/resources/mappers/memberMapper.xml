@@ -15,6 +15,11 @@
         SELECT m.id, m.name, m.age, m.role FROM memtb m WHERE m.id = #{id} AND m.password = #{password}
     </select>
 
+    <!-- Login -->
+    <select id="selectMemberOne1" parameterType="com.example.dto.Member" resultType="com.example.dto.Member">
+        SELECT m.* FROM memtb m WHERE m.id = #{id}
+    </select>
+
     <!-- update Info
     <update id="updateMemberOne" parameterType="com.example.dto.Member" resultType="com.example.dto.Member">
        UPDATE memtb SET name = #{name},age = #{obj.age}

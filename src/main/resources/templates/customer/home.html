@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>고객 홈화면</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+    <h3>고객용 홈화면</h3>
+    <a class="btn btn-outline-primary" th:href="@{/board/insert.do}">게시판 글쓰기</a>
+    <a class="btn btn-outline-primary" th:href="@{/board/select.do(no=1,page=2)}">게시글 조회</a>
+    <a class="btn btn-outline-primary" th:href="@{/home.do}">홈으로</a>
+    <div th:if="${user != null}">
+
+
+        <a th:href="@{/member/update.do}">정보수정</a> <!-- 이름, 나이변경 -->
+        <!-- 삭제, 로그아웃 -->
+        <hr />
+        <div th:if="${#strings.equals.(param.menu, '1')}">
+            <form th:action="@{/customer/home.do(menu=1)}" method="post">
+                <input type="text" placeholder="이름">
+                <input type="number" placeholder="나이">
+                <input type="submit" value="변경하기">
+            </form>
+        </div>
+        <div th:if="${#strings.equals.(param.menu, '2')}">
+            <form th:action="@{/customer/home.do(menu=1)}" method="post">
+                <input type="password" placeholder="현재비밀번호">
+                <input type="password" placeholder="바꿀비밀번호">
+                <input type="submit" value="비밀번호 변경하기">
+            </form>
+        </div>
+        <div th:if="${#strings.equals.(param.menu, '3')}">
+            <form th:action="@{/customer/home.do(menu=1)}" method="post">
+                <input type="password" placeholder="현재비밀번호">
+                <input type="submit" value="탈퇴하기">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

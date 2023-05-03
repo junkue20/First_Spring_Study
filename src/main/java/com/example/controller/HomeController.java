@@ -1,31 +1,34 @@
 package com.example.controller;
 
-
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    
-    // 자동 임포트 shift + alt + o
-    // 127.0.0.1:9090/ROOT/home.do
-    // 127.0.0.1:9090/ROOT/
-    @GetMapping(value = {"/home.do","/"})
-    public String homeGET(Model model) {
-        // requet.setAttribute("key","value")
-        model.addAttribute("title", "전송된 타이틀");
-        model.addAttribute("abc",   "마음대로");
-        // request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request.response);
+
+    // http://127.0.0.1:9090/ROOT/login.do
+    @GetMapping(value = "/login.do")
+    public String loginGET() {
+        return "login";
+    }
+
+    // http://127.0.0.1:9090/ROOT/home.do
+    @GetMapping(value = { "/home.do", "/" })
+    public String homeGET(Model model, @AuthenticationPrincipal User user) { // 세션에 있는 정보 가져오기
+        if (user != null) { // 로그인 되었음
+            System.out.println(user.toString());
+        }
+        model.addAttribute("user", user);
         return "home";
     }
 
-    // 127.0.0.1:9090/ROOT/main.do
-    @GetMapping(value = "/main.do")
-    public String mainGET() {
-        // request.getRequestDispatcher("/WEB-INF/main.jsp").forward(request.response);
-        return "main";
+    // http://127.0.0.1:9090/ROOT/403page.do
+    @GetMapping(value = "/403page.do")
+    public String pageGET() {
+        return "403page";
     }
-
 
 }

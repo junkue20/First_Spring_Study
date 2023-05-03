@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -7,13 +8,56 @@
     <title>Home 홈화면</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
-<body>
-     홈화면
 
-    <a class="btn btn-outline-primary" th:href="@{/board/insert.do}">게시판 글쓰기</a>
-    <a class="btn btn-outline-primary" th:href="@{/board/select.do(no=1,page=2)}">게시글 조회</a>
+<body style="padding: 15px;">
 
-    <div th:if="${session.USERID == null}">
+    <h3>홈화면</h3>
+    <hr />
+    <div th:if="${user == null}">
+        <a th:href="@{/customer/join.do}">고객 회원가입</a>
+        <a th:href="@{/login.do}">고객 로그인</a>
+    </div>
+    <div th:if="${user != null}">
+        <p th:text="${user.username}"></p>
+        <p th:text="${user.authorities[0]}"></p>
+        <a th:href="@{/customer/home.do}">고객홈 (CUSTOMER)</a>
+        <form th:action="@{/logout.do}" method="post">
+            <input type="submit" value="로그아웃">
+        </form>
+    </div>
+    <hr />
+ 
+    <div th:if="${user == null}">
+        <a th:href="@{/seller/join.do}">판매자 회원가입</a>
+        <a th:href="@{/login.do}">판매자 로그인</a>
+    </div>
+
+    <div th:if="${user != null}">
+        <p th:text="${user.username}"></p>
+        <p th:text="${user.authorities[0]}"></p>
+        <a th:href="@{/seller/home.do}">판매자홈</a>
+        <form th:action="@{/logout.do}" method="post">
+            <input type="submit" value="로그아웃">
+        </form>
+    </div>
+    <hr />
+
+    <div th:if="${user == null}">
+        <a th:href="@{/admin/join.do}">관리자 회원가입</a>
+        <a th:href="@{/login.do}">관리자 로그인</a>
+    </div>
+
+    <div th:if="${user != null}">
+        <p th:text="${user.username}"></p>
+        <p th:text="${user.authorities[0]}"></p>
+        <a th:href="@{/admin/home.do}">관리자홈</a>
+        <form th:action="@{/logout.do}" method="post">
+            <input type="submit" value="로그아웃">
+        </form>
+    </div>
+    <!-- -------------------------------------- -->
+
+    <!-- <div th:if="${session.USERID == null}">
         <a class="btn btn-outline-primary" th:href="@{/member/login.do}">로그인</a>
         <a class="btn btn-outline-primary" th:href="@{/member/join.do}">회원가입</a>
     </div>
@@ -27,6 +71,6 @@
         <div th:if="${#strings.equals(session.ROLE,'SELLER')}">
             <a th:href="@{/seller/home.do}">판매자홈</a>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>
