@@ -43,7 +43,7 @@ public class RestBoardController {
     public Map<String, Integer> updatehitPUT(@RequestBody Board board) {
         // 게시글 조회수 증가
         board.setHit(board.getHit() + 1);
-        
+
         // DB에 추가하고 결과 0또는 1로 추가하기
         int ret = 1;
         Map<String, Integer> retMap = new HashMap<>(); // 확인용 Map
@@ -69,18 +69,17 @@ public class RestBoardController {
     @RequestMapping(value = "/selectlist.json", method = { RequestMethod.GET })
     // 여러개 사용가능 @RequestMapping
     public List<Board> requestMethodName() {
-        // [{}, {}, {}, ... {}]
+        // {"result":1 list:[{},{},{} ...{}]} => javascript
         return bMapper.selectBoard();
     }
 
     // 127.0.0.1:9090/ROOT/api/board/select.json
     @GetMapping(value = "/select.json")
     // 하나만 사용 가능 @GetMapping
-    public Map<String, Object> selectGET() {
-        Map<String, Object> retMap = new HashMap<>();
+    public Map<String, String> selectGET() {
+        Map<String, String> retMap = new HashMap<>();
         retMap.put("result", "ok");
         return retMap;
-        
     }
     /* -------------------------------------------------------- */
 }

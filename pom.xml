@@ -19,6 +19,31 @@
 	<dependencies>
 		<!-- 추가하는 모든 dependency는 이쪽으로 추가 -->
 
+
+		<!-- 5월4일 추가본 (용도 물어볼것) -->
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+	
+		<dependency>
+	    	<groupId>io.jsonwebtoken</groupId>
+	    	<artifactId>jjwt</artifactId>
+	    	<version>0.9.1</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20230227</version>
+		</dependency>
+
+
 		<!-- 접근권한 -->
 		<dependency>
          	<groupId>org.springframework.boot</groupId>
