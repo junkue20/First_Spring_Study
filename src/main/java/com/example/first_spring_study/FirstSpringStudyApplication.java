@@ -15,7 +15,8 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan(basePackages={
 	"com.example.controller", 
 	"com.example.service", 
-	"com.example.config"}) // 컨트롤러, 서비스 위치, 시큐리티 환경설정
+	"com.example.config",
+	"com.example.restcontroller"}) // 컨트롤러, 서비스 위치, 시큐리티 환경설정
 	
 public class FirstSpringStudyApplication {
 

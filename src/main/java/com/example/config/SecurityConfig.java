@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .usernameParameter("id")
                 .passwordParameter("password")
                 .successHandler(new CustomLoginSuccessHandler())
-                // .defaultSuccessUrl("/home.do") // 로그인 성공시 이동할 페이지
+                .defaultSuccessUrl("/home.do") // 로그인 성공시 이동할 페이지
                 .permitAll();
 
         // 로그아웃 처리(GET은 안됨 반드시 POST로 호출해야 됨.)
@@ -62,6 +62,9 @@ public class SecurityConfig {
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .permitAll();
+
+        // post는 csrf를 전송해야하지만, 주소가 /api로 시작하는 모든 URL은 csrf가 없어도 됨.
+        http.csrf().ignoringAntMatchers("/api/**");
 
         // 서비스 등록
         http.userDetailsService(userDetailsService);

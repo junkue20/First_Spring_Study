@@ -25,6 +25,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         log.info(format, role);
 
         if(role.equals("ROLE_CUSTOMER")) { // 권한이 고객
+        
             response.sendRedirect(request.getContextPath() + "/customer/home.do");
         }
         else if(role.equals("ROLE_SELLER")) { // 권한이 판매자
@@ -33,7 +34,10 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         else if(role.equals("ROLE_ADMIN")) { // 권한이 관리자
             response.sendRedirect(request.getContextPath() + "/admin/home.do");
         }
-        response.sendRedirect(request.getContextPath() + "/home.do");
+        else{
+            response.sendRedirect(request.getContextPath() + "/home.do");
+        }
     }
 
 }
+

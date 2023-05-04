@@ -6,6 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+// 백엔드 Restful api연동 가능자 + mysql, orcle, mongodb ... + jpa + mybatis
+// 
+
+
 @Controller
 public class HomeController {
 
@@ -27,8 +31,10 @@ public class HomeController {
 
     // http://127.0.0.1:9090/ROOT/403page.do
     @GetMapping(value = "/403page.do")
-    public String pageGET() {
-        return "403page";
+    public String page403GET() {
+        return "/error/403page";
     }
+
+    
 
 }

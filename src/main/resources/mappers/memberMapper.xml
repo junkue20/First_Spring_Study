@@ -20,15 +20,14 @@
         SELECT m.* FROM memtb m WHERE m.id = #{id}
     </select>
 
-    <!-- update Info
-    <update id="updateMemberOne" parameterType="com.example.dto.Member" resultType="com.example.dto.Member">
+    <update id="updateMemberOne" parameterType="com.example.dto.Member">
        UPDATE memtb SET name = #{name},age = #{obj.age}
        WHERE id = #{id};
     </update>
 
-    delete Member 
-    <update id="deleteMemberInfo" parameterType="com.example.dto.member">
+     
+    <!-- <update id="deleteMemberInfo" parameterType="com.example.dto.member">
         UPDATE memtb SET password = null, name = null , age = null, regdate = null
         WHERE id = #{id} AND password =	#{password}
-    </update> -->
+    </update>  -->
 </mapper>
