@@ -15,18 +15,18 @@ public class WebErrorController implements ErrorController {
     public String handleError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
-        // if(status != null){
-        //     int statusCode = Integer.valueOf(status.toString());
+        if(status != null){
+            int statusCode = Integer.valueOf(status.toString());
 
-        //     if(statusCode == HttpStatus.NOT_FOUND.value()) {
-        //         return "/error/404page";
-        //     } 
+            if(statusCode == HttpStatus.NOT_FOUND.value()) {
+                return "/error/404page";
+            } 
             
-        //     else {
-        //         return "/error/errorpage";
-        //     }
-        // }
-        // return "/error/errorpage";
+            else {
+                return "/error/errorpage";
+            }
+        }
+        return "/error/errorpage";
     }
 
 }
