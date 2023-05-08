@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Board1;
+import com.example.entity.Reply1;
 import com.example.repository.Board1Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,9 @@ public class Board1Controller {
         public String selectOneGET(Model model, @RequestParam(name="no") long no) {
             Board1 board1 = b1Repository.findById(no).orElse(null);
             log.info(format, board1.toString());
+
+            // List<Reply1> list = b1Repository.findByBoard();
+            // log.info(format, list);
             model.addAttribute("board1", board1);
             return "/board1/selectone";
         }
