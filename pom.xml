@@ -19,6 +19,12 @@
 	<dependencies>
 		<!-- 추가하는 모든 dependency는 이쪽으로 추가 -->
 
+		<!-- 5월8일 추가본  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
 
 		<!-- 5월4일 추가본 (용도 물어볼것) -->
 		<dependency>
