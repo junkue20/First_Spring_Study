@@ -20,19 +20,20 @@
                 <th>작성자</th>
                 <th>조회수</th>
                 <th>날짜</th>
+                <th>버튼</th>
             </tr>
         </thead>
-
         <tbody>
             <tr th:each="obj : ${list}">
                 <td th:text="${obj.no}"></td>
-                <td><a th:href="@{/board1/selectone.do(no=${obj.no})}" th:text="${}"></a></td>
+                <td><a th:href="@{/board1/selectone.do(no=${obj.no})}" th:text="${obj.title}"></a></td>
                 <td th:text="${obj.writer}"></td>
                 <td th:text="${obj.hit}"></td>
                 <td th:text="${obj.regdate}"></td> 
+                <td><a th:href="@{/boardimage1/selectlist.do(no=${obj.no})}"><button>이미지</button></a></td>
             </tr>
         </tbody>
     </table>
-</body>
 
+</body>
 </html>

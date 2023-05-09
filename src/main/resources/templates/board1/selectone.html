@@ -18,15 +18,31 @@
     <hr />
 
     <h3>답글목록</h3>
-    <table>
+    <table border="1">
         <thead>
+            <tr>
+                <th>답글번호</th>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>작성날짜</th>
+                <th>버튼</th>
+            </tr>
+        </thead>
+        <tbody>
             <tr th:each="tmp : ${board1.list}">
                 <td th:text="${tmp.no}"></td>
                 <td th:text="${tmp.content}"></td>
                 <td th:text="${tmp.writer}"></td>
                 <td th:text="${tmp.regdate}"></td>
+                <td>
+                    <form th:action="@{/reply1/delete.do}" method="post">
+                        <input type="hidden" name="replyNo" th:value="${tmp.no}" />
+                        <input type="hidden" name="boardNo" th:value="${board1.no}" />
+                        <input type="submit" value="삭제" />
+                    </form>
+                </td>
             </tr>
-        </thead>
+        </tbody>
     </table>
     <hr />
 

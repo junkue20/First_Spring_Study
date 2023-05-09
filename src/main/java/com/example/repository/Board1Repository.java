@@ -10,4 +10,5 @@ import com.example.entity.Board1;
 @Repository
 public interface Board1Repository  extends JpaRepository<Board1, Long>{
     public List<Board1> findAllByOrderByNoDesc();
+    
 }
