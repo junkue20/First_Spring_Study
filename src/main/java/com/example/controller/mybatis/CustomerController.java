@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.controller.mybatis;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,7 +64,7 @@ public class CustomerController {
         if(menu == 1) {
             member.setId(user.getUsername());
             int ret = mMapper.updateMemberOne(member);
-
+            log.info(format, ret);
             //아이디정보 가져오기 => user.getUsername();
             return "redirect:/customer/home.do?menu=1";
         }

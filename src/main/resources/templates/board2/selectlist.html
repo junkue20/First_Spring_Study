@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>목록(board)</h3>
+    <a th:href="@{/board2/insertbatch.pknu}"><button>일괄추가</button></a>
+    <a th:onclick="formAction(1)"><button>일괄수정</button></a>
+    <a th:onclick="formAction(2)"><button>일괄삭제</button></a>
+    <hr />
+
+
+    <form th:action="@{/board2/selectlist.pknu}" method="get">
+        <input type="hidden" name="page" value="1" />
+        <select name="type">
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="writer">작성자</option>
+        </select>
+        <input type="text" name="text" placeholder="검색어" />
+        <input type="submit" value="검색">
+    </form>
+    <br>
+
+
+    <form th:action="@{/board2/isnertbatch.pknu}" method="post" id="form">
+        <table border="1">
+            <thead>
+                <tr style="text-align:center;">
+                    <td>체크</td>
+                    <td>번호</td>
+                    <td>제목</td>
+                    <td>작성자</td>
+                    <td>조회수</td>
+                    <td>날짜</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="obj : ${list}" style="text-align:center;">
+                    <td><input type="checkbox" name="chk[]" th:value="${obj.no.longValue()}" /></td>
+                    <td th:text="${obj.no.longValue()}"></td> <!-- long값으로 변환 -->
+                    <td th:text="${obj.title}" style="text-align:justify;"></td>
+                    <td th:text="${obj.writer}" style="text-align:justify;"></td>
+                    <td th:text="${obj.hit.longValue()}"></td>
+                    <td th:text="${obj.regdate}" style="text-align:justify;"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script th:inline="javascript" type="text/javascript">
+        function formAction(code) {
+            const form = document.getElementById('form');
+            if (code === 1) {
+                form.action = /*[[@{/board2/updatebatch.pknu}]]*/'';
+            }
+            else if (code === 2) {
+                form.action = /*[[@{/board2/deletebatch.pknu}]]*/'';
+            }
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

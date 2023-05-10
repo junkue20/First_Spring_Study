@@ -60,7 +60,6 @@ public class Board1 {
     @OrderBy(value = "no desc")
     List<BoardImage1> list1 =  new ArrayList<>();
 
-
     @Transient // 임시변수 == 컬럼이 생성되지 않는다. Mybatis dto 개념
     private String imageUrl;
 }
