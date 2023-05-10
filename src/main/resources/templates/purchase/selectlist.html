@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>주문내역(purchaseView)</h3>
+    <hr />
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>주문번호</td>
+                <td>주문수량</td>
+                <td>물품번호</td>
+                <td>물품가격</td>
+                <td>고객ID</td>
+                <td>고객명</td>
+                <td>물품명</td>
+                <td>주문일자</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="obj :${list}">
+                <td th:text="${obj.no.longValue()}"></td>
+                <td th:text="${obj.cnt.longValue()}"></td>
+                <td th:text="${obj.itemNo.longValue()}"></td>
+                <td th:text="${obj.itemPrice.longValue()}"></td>
+                <td th:text="${obj.customerId}"></td>
+                <td th:text="${obj.customerName}"></td>
+                <td th:text="${obj.itemName}"></td>
+                <td th:text="${obj.regdate}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

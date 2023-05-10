@@ -33,4 +33,9 @@ public interface BoardRepository extends JpaRepository<Board, BigDecimal> {
     List<Board> findByTitleIgnoreCaseContainingOrderByNoDesc(String titleText, Pageable pageable);
     List<Board> findByContentIgnoreCaseContainingOrderByNoDesc(String contentText, Pageable pageable);
     List<Board> findByWriterIgnoreCaseContainingOrderByNoDesc(String writerText, Pageable pageable);
+
+    // 페이지네이션용 갯수 cnt
+    long countByTitleIgnoreCaseContainingOrderByNoDesc(String titleText);
+    long countByContentIgnoreCaseContainingOrderByNoDesc(String contentText);
+    long countByWriterIgnoreCaseContainingOrderByNoDesc(String writerText);
 }

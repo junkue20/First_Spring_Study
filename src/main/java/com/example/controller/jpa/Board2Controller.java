@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -139,15 +140,22 @@ public class Board2Controller {
         try {
             // 2. 타입에 따라서 다른 메소드 호툴
             // findByTitle...()
-            List<Board> list = bRepository.findByTitleIgnoreCaseContainingOrderByNoDesc(text);
-            if (type.equals("content")) {
-                list = bRepository.findByContentIgnoreCaseContainingOrderByNoDesc(text);
-            } else if (type.equals("writer")) {
-                bRepository.findByWriterIgnoreCaseContainingOrderByNoDesc(text);
+            if(page==0){
+                return "redirect:/board2/selectlist.pknu?page=1&type=title&text=";
             }
+            PageRequest pageRequest = PageRequest.of((page-1), 10);
 
-            // List<Board> list = bRepository.findAllByOrderByNoDesc();
+            List<Board> list = bRepository.findByTitleIgnoreCaseContainingOrderByNoDesc(text, pageRequest);
+            long total = bRepository.countByTitleIgnoreCaseContainingOrderByNoDesc(text);
+            if (type.equals("content")) {
+                list = bRepository.findByContentIgnoreCaseContainingOrderByNoDesc(text, pageRequest);
+                total = bRepository.countByContentIgnoreCaseContainingOrderByNoDesc(text);
+            } else if (type.equals("writer")) {
+                list = bRepository.findByWriterIgnoreCaseContainingOrderByNoDesc(text, pageRequest);
+                total = bRepository.countByWriterIgnoreCaseContainingOrderByNoDesc(text);
+            }
             model.addAttribute("list", list);
+            model.addAttribute("pages", (total-1)/10+1);
             return "/board2/selectlist";
         } catch (Exception e) {
             e.printStackTrace();
