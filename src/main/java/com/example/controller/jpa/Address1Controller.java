@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Address1;
+import com.example.entity.Address1Projection;
 import com.example.entity.Member1;
 import com.example.repository.Address1Repository;
 import com.example.repository.Member1Repository;
@@ -31,6 +32,20 @@ public class Address1Controller {
     final Member1Repository m1Repository; // 저장소 객체
     final Address1Repository a1Repository;
     final String format = "Address1 => {}";
+
+    // http://127.0.0.1:9090/ROOT/address1/selectlistprojection.do
+    @GetMapping(value = "/selectlistprojection.do")
+    public String selectlistprojectGET(Model model){
+        try {
+            // List<Address1> list = a1Repository.findAllByOrderByNoDesc(Address.class);
+            List<Address1Projection> list = a1Repository.findAllByOrderByNoDesc(Address1Projection.class);
+            model.addAttribute("list", list);
+            return "/address1/selectlistprojection"; // html 위치
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
 
     @PostMapping(value = "/delete.do")
     public String deletePOST(

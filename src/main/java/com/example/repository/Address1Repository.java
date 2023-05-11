@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.entity.Address1;
+import com.example.entity.Address1Projection;
 
 
 
@@ -14,6 +15,12 @@ import com.example.entity.Address1;
 // 저장소에 이상이 있을 시 서버가 안돌아감!
 @Repository
 public interface Address1Repository extends JpaRepository<Address1, Long>{
+
+    // 제너릭을 이용한 타입설정
+    <T> List<T> findAllByOrderByNoDesc(Class<T> type);
+
+    // SELECT a.no, a.address, m.id, m.name FROM address1 a, member1 m ORDER BY no DESC;
+    List<Address1Projection> findAllByOrderByNoDesc();
     
     // SELECT .. WHERE address = ?
     List<Address1> findByAddress(String address);

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.entity.Member1;
+import com.example.entity.Member1Projection;
 import com.example.repository.Member1Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,24 @@ public class Member1Controller {
 
     final String format ="Member1Controller => {}";
     final Member1Repository m1Repository; // 저장소 객체
+    
+    // http://127.0.0.1:9090/ROOT/member1/selectlistprojection.do
+    @GetMapping(value = "/selectlistprojection.do")
+    public String selectListProjectionGET(Model model){
+        try {
+            List<Member1Projection> list = m1Repository.findAllByOrderByIdAsc();
+            log.info(format, list.toString());
+            for(Member1Projection obj : list) { // list형태로 왔기 때문에 확인하기 위해서는 반복문을 사용!
+                log.info(format, obj.getId() + "," + obj.getName() + "," + obj.getAge());
+            }
+            model.addAttribute("list", list);
+            return "/member1/selectlistprojection";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
+
 
     @PostMapping(value="/update.do")
     public String updatePOST(@ModelAttribute Member1 member1) {

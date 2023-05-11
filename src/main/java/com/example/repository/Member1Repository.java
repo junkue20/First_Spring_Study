@@ -9,18 +9,24 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.entity.Member1;
+import com.example.entity.Member1Projection;
 
 
 // 엔티티, 엔티티의기본키타입
 @Repository
 public interface Member1Repository extends JpaRepository<Member1, String>{
+
+    // 일부 컬럼만 출력
+    // JPQL => SELECT id, name, age FROM member1 ORDER BY id ASC;
+    public List<Member1Projection> findAllByOrderByIdAsc();
     
-    // JPQL => select m.* from Member1 m order by m.name desc
+    // JPQL => select m.* from Member1 m order by m.name desc;
     public List<Member1> findAllByOrderByNameDesc();
 
-    // JPQL => select m.* from Member1 m where m.name like '%?%' order by m.name desc
+    // JPQL => select m.* from Member1 m where m.name like '%?%' order by m.name desc;
     public List<Member1> findByNameContainingOrderByNameDesc(String name);
 
+    
     public long countByNameContaining(String name);
 
     // JPQL => select m.* from Member1 m where m.name like '%?%' order by m.name desc limit 페이지네이션
