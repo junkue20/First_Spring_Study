@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.Menu1;
+import com.example.entity.Restaurant1;
 import com.example.repository.Menu1Repository;
 import com.example.repository.Restaurant1Repository;
 
@@ -27,7 +28,7 @@ public class Menu1Controller {
 
     final Restaurant1Repository r1Repository;
     final Menu1Repository m1Repository;
-    final String format = "Menu1Controller => {}";
+    final String format = "Menu1format => {}";
 
     // 127.0.0.1:9090/ROOT/menu1/insert.food
     @GetMapping(value = "/insert.food")
@@ -50,13 +51,21 @@ public class Menu1Controller {
     @PostMapping(value = "/insert.food")
     public String insertPOST(
             @ModelAttribute Menu1 obj,
-            @RequestParam(name = "tmpFile") MultipartFile file) {
+            @RequestParam(name = "tmpFile") MultipartFile file,
+            @RequestParam(name = "tmpFile") String name,
+            @RequestParam(name = "tmpFile") BigInteger price,
+            @RequestParam(name = "restaurant1.no") BigInteger no,
+            @RequestParam(name = "restaurant1.phone") String phone) {
         try {
-            // r1Repository.save(obj);
+            
             obj.setImagedata(file.getInputStream().readAllBytes());
             obj.setImagename(file.getOriginalFilename());
             obj.setImagesize(BigInteger.valueOf(file.getSize()));
             obj.setImagetype(file.getContentType());
+            obj.setName(name);
+            obj.setPrice(price);
+            obj.getRestaurant1().setNo(no);
+            obj.getRestaurant1().setPhone(phone);
 
             log.info("Menu1 => {}", obj.toString());
 
