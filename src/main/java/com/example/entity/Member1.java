@@ -1,16 +1,13 @@
 package com.example.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -42,15 +39,17 @@ public class Member1 {
     private int age;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @CreationTimestamp // 추가시에만 날짜정보 저장
+    @CreationTimestamp // 추가시에만 날짜 정보 저장
     private Date regdate;
+    
+    @ToString.Exclude
+    @OneToOne(mappedBy = "member1", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    private MemberInfo1 memberInfo1;
 
-    // EAGER => member1을 조회시 address1을 join하여 보여줌
-    // LAZY => member1을 조회시 address1을 join하지 않고 address1을 필요할 때 조인함.
+    
+    // @ToString.Exclude //stackoverflow 
+    // @OneToMany(mappedBy = "member1", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    // @OrderBy(value = "no desc")
+    // List<Address1> list = new ArrayList<>();
 
-    /* 양방향 외래키 */
-    @ToString.Exclude // stackoverflow
-    @OneToMany(mappedBy = "member1", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @OrderBy(value = "no desc")
-    List<Address1> list = new ArrayList<>();
- }
+}
