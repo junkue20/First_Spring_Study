@@ -32,6 +32,9 @@ public interface Member1Repository extends JpaRepository<Member1, String>{
     // JPQL => select m.* from Member1 m where m.name like '%?%' order by m.name desc limit 페이지네이션
     public List<Member1> findByNameIgnoreCaseContainingOrderByNameDesc(String name, Pageable pageable);
 
+    // JPQL => select m.* from Member1 m where m.name like '%?%' order by m.name desc 페이지네이션
+    public List<Member1> findByNameContainingOrderByNameDesc(String name, Pageable pageable);
+
     // nativequery사용하기
     @Query(value="SELECT * FROM ( SELECT m1.*, ROW_NUMBER() OVER (ORDER BY name DESC) rown FROM MEMBER1 m1 WHERE m1.name LIKE '%' || :name || '%' ) WHERE rown BETWEEN :start AND :end", nativeQuery=true)
     public List<Member1> selectByNameContainingPagenation(@Param("name") String name, @Param("start") int start, @Param("end") int end );
