@@ -1,6 +1,5 @@
 package com.example.controller.jpa;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,7 @@ import com.example.entity.Board1View;
 import com.example.repository.Board1ViewRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 @RequestMapping(value = "/board1view")
 @RequiredArgsConstructor
