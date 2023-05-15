@@ -47,8 +47,7 @@ public class Menu1Controller {
         @RequestParam(name="rno") long rno,
         @RequestParam(name="rphone") long rphone) {
         try {
-            Menu1 obj = m1Repository
-                .findById(BigInteger.valueOf(no)).orElse(null);
+            Menu1 obj = m1Repository.findById(BigInteger.valueOf(no)).orElse(null);
             model.addAttribute("obj", obj);
             model.addAttribute("rno", rno);
             model.addAttribute("rphone", rphone);
