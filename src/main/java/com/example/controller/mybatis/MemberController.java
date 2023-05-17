@@ -95,7 +95,7 @@ public class MemberController {
     }
      /* ------------------------------------------------------------------------------------------------- */
                                                 // Delete Member //
-    @PostMapping(value="path")
+    @PostMapping(value="delete.do")
     public String deleteMemberInfo(@ModelAttribute Member member){
         log.info("delete.do => {}", member.toString() );
         int ret = mMapper.deleteMemberInfo(member);

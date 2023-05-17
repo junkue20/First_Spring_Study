@@ -35,6 +35,11 @@ public class HomeController {
         return "/error/403page";
     }
 
+    // http://127.0.0.1:9090/ROOT/logout.do
+    @GetMapping(value = "/logout.do")
+    public String logoutGET() {
+        return "logout";
+    }
     
 
 }
