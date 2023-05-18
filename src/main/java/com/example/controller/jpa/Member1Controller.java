@@ -44,7 +44,7 @@ public class Member1Controller {
 
     @PostMapping(value="/join1.do")
     public String join1POST(@ModelAttribute Member1 member1, 
-        @ModelAttribute MemberInfo1 memberInfo1){
+                            @ModelAttribute MemberInfo1 memberInfo1){
         try {
             // Member1(id=b11, pw=a, name=b, age=1, regdate=null, memberInfo1=)
             log.info("{}", member1);
