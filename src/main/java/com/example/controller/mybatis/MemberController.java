@@ -71,7 +71,7 @@ public class MemberController {
             httpSession.setAttribute("ROLE", ret.getRole());
             return "redirect:/home.do";    // 로그인 성공 시
         }
-        return "redirect:login.do"; // 로그인 실패 시
+        return "redirect:/login.do"; // 로그인 실패 시
     }
     
     /* ------------------------------------------------------------------------------------------------- */

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>채팅</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h3>chat</h3>
+
+
+    <div>
+        <input type="text" id="input" />
+        <button id="send" onclick="sendMessage()">send</button>
+        <div id="messages" style="border:1px solid #cccccc;"></div>
+    </div>
+
+
+
+
+    <script>
+        // 고유한 아이디 만들기
+        const id = `ds209_${new Date().getTime()}`;
+        
+        // 접속하기 => 내가 전달한 아이디를 map에 변수에 보관하기 (2분)
+        const eventSource = new EventSource(`/ROOT/api/sse/subscribe?id=${id}`);
+
+        // callback1
+        eventSource.onopen = (e) => {
+            console.log('onopen', e);
+        };
+
+        // callback2
+        eventSource.onmessage = (e) => {
+            const div = document.querySelector('#messages');
+            div.innerHTML = `${e.data}<br />` + div.innerHTML;
+            console.log('onmessage', e.data);
+        };
+
+        // callback3
+        eventSource.onerror = (e) => {
+            console.log('onerror', e);
+        };
+
+        const sendMessage = () => {
+            const msg = document.querySelector('#input').value; 
+            fetch(`/ROOT/api/sse/publish?message=${msg}`); // 메시지 보내기
+        };
+    </script>
+</body>
+
+</html>

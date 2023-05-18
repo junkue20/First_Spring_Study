@@ -7,9 +7,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 // 새로운 패키지를 생성하고 역할을 부여하면 반드시 이 실행파일에 등록해야 함.
 
+@EnableScheduling // 스케쥴링 기능용 어노테이션
 @SpringBootApplication
 @PropertySource(value = { "classpath:global.properties" }) // 직접 만든 환경설정 파일 위치, (classpath ==> resources와 동일함.)
 @MapperScan(basePackages = { "com.example.mapper" }) // 매퍼 위치 설정
