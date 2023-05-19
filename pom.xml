@@ -18,6 +18,13 @@
 	</properties>
 	<dependencies>
 		<!-- 추가하는 모든 dependency는 이쪽으로 추가 -->
+		
+		<!-- 5월 19일 추가본 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 
 		<!-- 5월16일 추가본 -->
 		<dependency>
