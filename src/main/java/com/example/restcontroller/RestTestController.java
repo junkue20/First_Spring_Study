@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class RestTestController {
 
+        /*--------------- @GetMapping 방식 ---------------*/
+
     // 127.0.0.1:9090/ROOT/api/test1/select.do?aaa=a&bbb=b&ccc=c
     // 조회용 @RequestParam(name="aaa") String aaa
     @GetMapping(value = "/select.do")
@@ -35,6 +37,8 @@ public class RestTestController {
         return rMap;
     }
 
+        /*--------------- @PostMapping 방식 ---------------*/
+
     // 추가
     // @RequestBody 엔티티 obj
     @PostMapping(value = "/insert.do")
@@ -48,6 +52,8 @@ public class RestTestController {
         }
         return rMap;
     }
+
+        /*--------------- @PutMapping 방식 ---------------*/
 
     // 수정
     // 127.0.0.1:9090/ROOT/api/test1/update.do
@@ -64,6 +70,9 @@ public class RestTestController {
         return rMap;
 
     }
+
+        /*--------------- @DeleteMapping 방식 ---------------*/
+
 
     // 삭제
     // @RequestBody 엔티티 obj
