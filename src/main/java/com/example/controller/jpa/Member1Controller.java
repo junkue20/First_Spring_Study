@@ -83,6 +83,7 @@ public class Member1Controller {
         }
     }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
     @PostMapping(value="/update.do")
     public String updatePOST(@ModelAttribute Member1 member1) {
@@ -108,6 +109,9 @@ public class Member1Controller {
         Member1 member1 = m1Repository.findById(id).orElse(null);
         return new ModelAndView("/member1/update", "member1", member1);
     }
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
     @PostMapping(value="/delete.do")
     public String deletePOST(@RequestParam(name="id") String id) {

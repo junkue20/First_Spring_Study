@@ -16,6 +16,11 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	
+	<!-- 개발용 jar -->
+	<!-- 서버 배포용 war -->
+	<packaging>war</packaging>
+	
 	<dependencies>
 		<!-- 추가하는 모든 dependency는 이쪽으로 추가 -->
 		

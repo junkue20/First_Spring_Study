@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <button th:onclick="init()">버튼누르면 함수호출</button>
+    <select th:onchange="init()"></select>
+
+    rest로 만든 controller는 반드시 script로만 자료를 처리 할 수 있음.
+
+    <script th:inline="javascript">
+
+        function init() { // 함수는 자동으로 호출되지 않음. 호출시켜야 함.
+
+            // @GetMapping 방식
+            const urlGet = /*[[@{/api/test1/select.do(aaa="a")}]]*/"";
+            const headersGet = { "Content-Type": "application/json" };
+            const { dataGet } = await axios.get(urlGet, { headers: headersGet });
+            console.log('반환되는 결과', dataGet)
+
+            // @PostMapping 방식
+            const urlPost = /*[[@{/api/test1/insert.do}]]*/"";
+            const headersPost = { "Content-Type": "application/json" };
+            const bodyPost = { id: "aaa", name: "bbb" };
+            const { dataPost } = await axios.get(urlPost, bodyPost, { headers: headersPost });
+            console.log('반환되는 결과', dataPost);
+
+            // @UpdateMapping 방식
+            const urlUpdate = /*[[@{/api/test1/update.do}]]*/"";
+            const bodyUpdate = { id: "aaa", name: "bbb" };
+            const headersUpdate = { "Content-Type": "application/json" };
+            const { dataUpdate } = await axios.put(urlUpdate, bodyUpdate, { headers: headersUpdate });
+            console.log('반환되는 결과', dataUpdate);
+
+            // @DeleteMapping 방식
+            const urlDelete = /*[[@{/api/test1/delete.do}]]*/"";
+            const bodyDelete = { id: "aaa", name: "bbb" };
+            const headersDelete = { "Content-Type": "application/json" };
+            const { dataDelete } = await axios.delete(urlDelete, { headers: headersDelete, data: bodyDelete });
+            console.log('반환되는 결과', dataDelete);
+        }
+
+        // init(); 
+        //수동으로 함수 호출함 (페이지 뜨자마자 바로.)
+
+    </script>
+
+</body>
+
+</html>
