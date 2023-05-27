@@ -1,2 +1,2 @@
-# first_spring_study
- Spring 학습
+# First_Spring_Study
+ Spring Boot 학습
